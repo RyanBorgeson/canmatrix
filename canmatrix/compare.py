@@ -447,10 +447,8 @@ def dumpResult(res, depth=0):
                 0] is not None and res._changes[1] is not None:
             for _ in range(0, depth):
                 print(" ", end=' ')
-            print("old: " +
-                  str(res._changes[0]).encode('ascii', 'replace') +
-                  " new: " +
-                  str(res._changes[1]).encode('ascii', 'replace'))
+                print("old: " + str(res._changes[0]) + " new: " + str(res._changes[1]))
+            
     for child in res._children:
         dumpResult(child, depth + 1)
 

@@ -42,13 +42,13 @@ In addition to the *canmatrix* package there are 2 scripts installed with this p
 
 	converts CAN database formats between all supported formats. 
 	
-	Example: "*canconvert* someArSystemdescription.arxml file.dbc"
+	Example: "*convert* someArSystemdescription.arxml file.dbc"
 	
 2. **cancompare**: 
 
 	compares 2 CAN databases (of different or same format). 
 	
-	Example: "*cancompare* file1.dbc file2.dbc"
+	Example: "*compare* file1.dbc file2.dbc"
 	
 If you are using a *NIX-System, these scripts should be callable from command line
 
@@ -77,17 +77,17 @@ There are some example python scripts in the example-folder
 
 ####General
 
-```canconvert.py -h```
-```canconvert.py --help```
+```convert.py -h```
+```convert.py --help```
 			show help message/usage and exits
 
-```canconvert.py -v```
+```convert.py -v```
   			Output verbosity
   			
-```canconvert.py -s```
+```convert.py -s```
   			don't print status messages to stdout. (only errors)
   			
-```canconvert.py -f FORCE_OUTPUT```
+```convert.py -f FORCE_OUTPUT```
     			enforce output format, ignoring output file extension (e.g., -f csv)
 
 				
@@ -95,15 +95,15 @@ There are some example python scripts in the example-folder
 
 **convert dbc file to xlsx:**
 
-```canconvert.py source.dbc target.xlsx```
+```convert.py source.dbc target.xlsx```
 
 **convert dbc file to dbf:**
 
-```canconvert.py source.dbc target.dbf```
+```convert.py source.dbc target.dbf```
 
 **convert arxml file to dbc:**
 
-```canconvert.py source.arxml target.dbc```
+```convert.py source.arxml target.dbc```
 
 Note: in case of .arxml there can be multiple can databases in. 
 Thus the target ```target.dbc``` may in this case be called ```BUS-NAME-IN-ARXML_target.dbc```. 
@@ -113,13 +113,13 @@ You can even convert to the same format:
 
 **convert dbc file to dbc:**
 
-```canconvert.py source.dbc target.dbc```
+```convert.py source.dbc target.dbc```
 
 Multiple charset support:
 
 **convert dbc file to dbc with different charset:**
 
-```canconvert.py --dbcImportEncoding=iso-8859-1 --dbcImportCommentEncoding=cp-1252 --dbcExportEncoding=utf-8 --dbcExportCommentEncoding=utf-8 source.dbc target.dbc```
+```convert.py --dbcImportEncoding=iso-8859-1 --dbcImportCommentEncoding=cp-1252 --dbcExportEncoding=utf-8 --dbcExportCommentEncoding=utf-8 source.dbc target.dbc```
 
 This converts ```source.dbc``` where units are coded in ```iso-8859-1``` and comments are coded in ```cp-1252``` in a ```target.dbc``` where everything is coded in ```utf-8```.
 Similar charset conversions are possible or even mandatory for following formats: dbc, dbf and sym.
@@ -129,7 +129,7 @@ Similar charset conversions are possible or even mandatory for following formats
 
 **delete zero sized signals:**
 
-```canconvert.py --deleteZeroSignals source.dbc target.dbc```
+```convert.py --deleteZeroSignals source.dbc target.dbc```
 
 will delete signals with 0 bit length from matrix
 
@@ -147,7 +147,7 @@ will delete the attributes ```GenMsgCycleTime``` and ```MyAttrib``` from all fra
 
 **recalculate DLC:**
 
-```canconvert.py --recalcDLC=max source.dbc target.dbc```
+```convert.py --recalcDLC=max source.dbc target.dbc```
 
 this will recalculate DLC for each frame in ```source.dbc```. 
 In ```target.dlc```  the same DLC like in ```source.dbc``` will be stored, except the calculated DLC is bigger.
@@ -155,39 +155,39 @@ Than the calculated DLC will be stored.
 
 **recalculate DLC:**
 
-```canconvert.py --recalcDLC=force source.dbc target.dbc```
+```convert.py --recalcDLC=force source.dbc target.dbc```
 
 this will recalculate DLC for each frame in ```source.dbc```. 
 In ```target.dlc``` the calculated DLC will be stored independently from ```source.dbc```.
 
 **delete unneeded/obsolete defines:**
 
-```canconvert.py --deleteObsoleteDefines source.dbc target.dbc```
+```convert.py --deleteObsoleteDefines source.dbc target.dbc```
 
 this will remove all defines which no attribute exist for in ```source.dbc``` and store the result in ```target.dlc```.
 
 **delete ECU:**
 
-```canconvert.py --deleteECU=myEcu,myEcu2 source.dbc target.dbc```
+```convert.py --deleteECU=myEcu,myEcu2 source.dbc target.dbc```
 
 this will remove ECUs ```myEcu``` and ```myEcu2``` in ```source.dbc``` and store the result in ```target.dlc```.
 
 **rename ECU:**
 
-```canconvert.py --renameECU=myEcu:myNewEcu,myEcu2:myNewEcu2 source.dbc target.dbc```
+```convert.py --renameECU=myEcu:myNewEcu,myEcu2:myNewEcu2 source.dbc target.dbc```
 
 this will load ```source.dbc``` and rename ECU ```myEcu``` in ```myNewEcu```  and ```myEcu2``` in ```myNewEcu2```.
 The result is stored in ```target.dlc```.
 
 **delete Frame:**
 
-```canconvert.py --deleteFrame=myFrame,myFrame2 source.dbc target.dbc```
+```convert.py --deleteFrame=myFrame,myFrame2 source.dbc target.dbc```
 
 this will remove frames ```myFrame``` and ```myFrame2``` in ```source.dbc``` and store the result in ```target.dlc```.
 
 **rename Frame:**
 
-```canconvert.py --renameFrame=myFrame:myNewFrame,myFrame2:myNewFrame2 source.dbc target.dbc```
+```convert.py --renameFrame=myFrame:myNewFrame,myFrame2:myNewFrame2 source.dbc target.dbc```
 
 this will load ```source.dbc``` and rename frames ```myFrame``` in ```myNewFrame```  and ```myFrame2``` in ```myNewFrame2```.
 The result is stored in ```target.dlc```.
@@ -195,13 +195,13 @@ The result is stored in ```target.dlc```.
 
 **delete Signal:**
 
-```canconvert.py --deleteSignal=mySignal,mySignal2 source.dbc target.dbc```
+```convert.py --deleteSignal=mySignal,mySignal2 source.dbc target.dbc```
 
 this will remove signales ```mySignal``` and ```mySignal2``` in ```source.dbc``` and store the result in ```target.dlc```.
 
 **rename Signal:**
 
-```canconvert.py --renameSignal=mySignal:myNewSignal,mySignal2:myNewSignal2 source.dbc target.dbc```
+```convert.py --renameSignal=mySignal:myNewSignal,mySignal2:myNewSignal2 source.dbc target.dbc```
 
 this will load ```source.dbc``` and rename signals ```mySignal``` in ```myNewSignal```  and ```mySignal2``` in ```myNewSignal2```.
 The result is stored in ```target.dlc```.
@@ -211,7 +211,7 @@ The result is stored in ```target.dlc```.
 
 **extract one ecu out of matrix**
 
-```canconvert.py --ecus=REAR_ECU source.dbc target.dbc```
+```convert.py --ecus=REAR_ECU source.dbc target.dbc```
 
 This generates a ```target.dbc``` with all Informations out of ```source.dbc``` which are needed for ```REAR_ECU```.
 All frames which are received or sent by ```REAR_ECU``` are extracted. Also all attributes of the frames and the ECU.
@@ -219,35 +219,35 @@ This is some *lite* ECU-Extract.
 
 **extract multiple ecus out of matrix:**
 
-```canconvert.py --ecus=FRONT_ECU,REAR_ECU source.dbc target.dbc```
+```convert.py --ecus=FRONT_ECU,REAR_ECU source.dbc target.dbc```
 
 **extract frame[s] out of matrix:**
 
-```canconvert.py --frames=REAR_FRAME,FRONT_FRAME source.dbc target.dbc```
+```convert.py --frames=REAR_FRAME,FRONT_FRAME source.dbc target.dbc```
 
 Extracts the frames ```REAR_FRAME``` and ```FRONT_FRAME``` with the needed ECUs and attributes.
 
 **merge multiple databases:**
 
-```canconvert.py --merge=second.dbc source.dbc target.dbc```
+```convert.py --merge=second.dbc source.dbc target.dbc```
 
 Merges ```source.dbc``` and ```second.dbc``` in ```target.dbc```.
 
 **merge ECU from other  database:**
 
-```canconvert.py --merge=second.dbc:ecu=REAR_ECU source.dbc target.dbc```
+```convert.py --merge=second.dbc:ecu=REAR_ECU source.dbc target.dbc```
  
 Merges REAR_ECU out of ```second.dbc``` with ```source.dbc``` and store result in ```target.dbc```.
 
 **merge FRAME from other database:**
 
-```canconvert.py --merge=second.dbc:frame=REAR_FRAME source.dbc target.dbc```
+```convert.py --merge=second.dbc:frame=REAR_FRAME source.dbc target.dbc```
  
 Merges REAR_FRAME out of ```second.dbc``` with ```source.dbc``` and store result in ```target.dbc```.
 
 **combinations and multiple extraction possible:**
 
-```canconvert.py second.dbc:ecu=REAR_ECU:ecu=FRONT_ECU:frame=FRAME1:FRAME=FRAME2 source.dbc target.dbc```
+```convert.py second.dbc:ecu=REAR_ECU:ecu=FRONT_ECU:frame=FRAME1:FRAME=FRAME2 source.dbc target.dbc```
 
 Merges REAR_ECU and FRONT_ECU and FRAME1 and FRAME2 out of ```second.dbc``` with ```source.dbc``` and store result in ```target.dbc```.
 

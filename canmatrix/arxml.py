@@ -884,8 +884,8 @@ def getSignals(signalarray, Bo, arDict, ns, multiplexId):
 
         signalDescription = getDesc(syssignal, arDict, ns)
         datatype = arGetChild(syssignal, "DATA-TYPE", arDict, ns)
-        if datatype is None:  # AR4?
-            print("no datatype reference")
+        #if datatype is None:  # AR4?
+            #print("no datatype reference")
         lower = arGetChild(datatype, "LOWER-LIMIT", arDict, ns)
         upper = arGetChild(datatype, "UPPER-LIMIT", arDict, ns)
         if lower is not None and upper is not None:
@@ -929,8 +929,8 @@ def getSignals(signalarray, Bo, arDict, ns, multiplexId):
             else:
                 desc = sl.text
 
-            if ll is not None and desc is not None and int(
-                    ul.text) == int(ll.text):
+            if ll is not None and desc is not None and float(
+                    ul.text) == float(ll.text):
                 values[ll.text] = desc
 
             scaleDesc = getDesc(compuscale, arDict, ns)
@@ -1110,10 +1110,10 @@ def getFrame(frameTriggering, arDict, multiplexTranslation, ns):
         if extEle.text == 'EXTENDED':
             newFrame.extended = 1
 
-    timingSpec = arGetChild(pdu, "I-PDU-TIMING-SPECIFICATION", arDict, ns)
+    timingSpec = arGetChild(pdu, "I-PDU-TIMING-SPECIFICATIONS", arDict, ns)
     cyclicTiming = arGetChild(timingSpec, "CYCLIC-TIMING", arDict, ns)
-    repeatingTime = arGetChild(cyclicTiming, "REPEATING-TIME", arDict, ns)
-
+    repeatingTime = arGetChild(cyclicTiming, "TIME-PERIOD", arDict, ns)
+	
     eventTiming = arGetChild(timingSpec, "EVENT-CONTROLLED-TIMING", arDict, ns)
     repeats = arGetChild(eventTiming, "NUMBER-OF-REPEATS", arDict, ns)
     minimumDelay = arGetChild(timingSpec, "MINIMUM-DELAY", arDict, ns)
@@ -1150,6 +1150,7 @@ def getFrame(frameTriggering, arDict, multiplexTranslation, ns):
     if value is not None:
         newFrame.addAttribute("GenMsgCycleTime",
                               str(int(float(value.text) * 1000)))
+							  
 
 #    pdusigmappings = arGetChild(pdu, "SIGNAL-TO-PDU-MAPPINGS", arDict, ns)
 #    if pdusigmappings is None or pdusigmappings.__len__() == 0:

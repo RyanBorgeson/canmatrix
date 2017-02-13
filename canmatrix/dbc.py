@@ -48,7 +48,6 @@ def normalizeName(name, whitespaceReplacement):
 
     return name
 
-
 def dump(db, f, **options):
     if 'dbcExportEncoding' in options:
         dbcExportEncoding = options["dbcExportEncoding"]
@@ -585,8 +584,6 @@ def load(f, **options):
                 botschaftId = temp.group(1)
                 signal = temp.group(2)
                 tempList = temp.group(3).split('"')
-                if not botschaftId.isdigit():
-                  continue
                 try:
                     for i in range(math.floor(len(tempList) / 2)):
                         bo = db.frameById(botschaftId)
@@ -699,7 +696,7 @@ def load(f, **options):
                                     temp_raw.group(2).decode(dbcImportEncoding))
 #               else:
 #                       print "Unrecocniced line: " + l + " (%d) " % i
-
+        
     for frame in db.frames:
         # receiver is only given in the signals, so do propagate the receiver
         # to the frame:
@@ -708,4 +705,5 @@ def load(f, **options):
         if frame.id > 0x80000000:
             frame.id -= 0x80000000
             frame.extended = 1
+            
     return db
